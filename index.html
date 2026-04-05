@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retraite — Athènes · Marseille</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2A4A;--navy-l:#2a3f6a;--gold:#C9A84C;
+  --cream:#F5F1E8;--cream-d:#EDE8DB;
+  --ink:#1a1a1a;--ink-m:#5a5a5a;--ink-f:#9a9a9a;
+  --green:#2D6A4F;--amber:#B8860B;--red:#8B2020;
+  --border:rgba(26,42,74,0.12);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --mono:'DM Mono',monospace;
+}
+html,body{background:var(--cream);color:var(--ink);font-family:var(--serif);min-height:100vh}
+header{border-bottom:1px solid var(--border);padding:1.5rem 2rem 1.2rem;display:flex;justify-content:space-between;align-items:flex-end;background:#fff;flex-wrap:wrap;gap:12px}
+.title-block h1{font-size:1.7rem;font-weight:300;letter-spacing:-0.02em;color:var(--navy)}
+.title-block h1 em{font-style:italic;color:var(--gold)}
+.title-block p{margin-top:4px;font-size:0.7rem;font-family:var(--mono);color:var(--ink-f);letter-spacing:0.05em}
+.user-select{display:flex;gap:6px;align-items:center}
+.user-label{font-size:0.7rem;font-family:var(--mono);color:var(--ink-f);letter-spacing:0.06em;margin-right:4px}
+.user-btn{padding:5px 14px;border:1px solid var(--border);border-radius:2px;background:transparent;font-family:var(--serif);font-size:0.82rem;cursor:pointer;color:var(--ink-m);transition:all .2s}
+.user-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.sync-bar{background:var(--cream-d);border-bottom:1px solid var(--border);padding:5px 2rem;font-family:var(--mono);font-size:0.68rem;color:var(--ink-f);display:flex;align-items:center;gap:7px}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--ink-f);transition:background .3s;flex-shrink:0}
+.sync-dot.synced{background:var(--green)}
+.sync-dot.syncing{background:var(--amber);animation:pulse 1s infinite}
+.sync-dot.error{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.8rem}
+.tab-btn{padding:7px 18px;border:none;background:none;font-family:var(--serif);font-size:0.88rem;color:var(--ink-m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--gold);font-weight:500}
+.panel{display:none}.panel.active{display:block}
+.score-grid{display:grid;grid-template-columns:1fr 160px 160px;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#fff}
+.sg-header{background:var(--navy);color:#fff;padding:10px 14px;font-size:0.7rem;font-family:var(--mono);letter-spacing:0.08em;text-transform:uppercase}
+.sg-header.dest{text-align:center;border-left:1px solid rgba(255,255,255,.1)}
+.sg-crit{padding:12px 14px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+.sg-score{padding:10px 14px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.sg-score:hover{background:var(--cream)}.sg-score:last-child{border-right:none}
+.cn{font-size:0.9rem;color:var(--ink)}.cw{font-size:0.65rem;font-family:var(--mono);color:var(--ink-f);margin-top:2px}
+.badge{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:500;color:#fff;transition:transform .15s}
+.sg-score:hover .badge{transform:scale(1.1)}
+.edit-h{font-size:0.58rem;color:var(--ink-f);opacity:0;transition:opacity .15s}
+.sg-score:hover .edit-h{opacity:1}
+.total-crit{background:var(--navy);padding:12px 14px;border-right:1px solid rgba(255,255,255,.1)}
+.total-score{background:var(--navy);padding:10px 14px;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(255,255,255,.1)}
+.total-score:last-child{border-right:none}
+.tl{font-size:0.65rem;font-family:var(--mono);color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase}
+.tv{font-size:1.5rem;font-weight:300;color:var(--gold)}
+.rank-dest{margin-bottom:1.8rem}
+.rank-name{font-size:1rem;font-weight:300;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.rank-total{font-size:0.7rem;font-family:var(--mono);color:var(--ink-f)}
+.rank-bar{display:grid;grid-template-columns:150px 1fr 28px;align-items:center;gap:8px;margin-bottom:5px}
+.rcn{color:var(--ink-m);font-size:0.75rem}
+.rtrack{height:15px;background:var(--cream-d);border-radius:2px;overflow:hidden}
+.rfill{height:100%;border-radius:2px;transition:width .6s ease}
+.rv{font-family:var(--mono);font-size:0.68rem;color:var(--ink-m);text-align:right}
+.detail-item{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:6px}
+.detail-head{padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--cream-d)}
+.dhn{font-size:0.9rem;font-weight:500;color:var(--navy)}
+.dhw{font-size:0.65rem;font-family:var(--mono);color:var(--ink-f)}
+.detail-body{display:none;padding:12px 14px;font-size:0.82rem;color:var(--ink-m);line-height:1.6}
+.detail-body.open{display:block}
+.detail-scores{display:flex;gap:12px;margin-top:8px}
+.ds-item{display:flex;align-items:center;gap:6px;font-size:0.78rem}
+.ds-badge{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:500;color:#fff}
+.notes-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem}
+.note-item{display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:start;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:4px}
+.note-author{font-size:0.68rem;font-family:var(--mono);color:var(--ink-f)}
+.note-author strong{color:var(--navy);display:block;margin-bottom:2px}
+.note-text{font-size:0.85rem;color:var(--ink);line-height:1.5}
+.note-del{background:none;border:none;color:var(--ink-f);cursor:pointer;font-size:0.75rem;padding:0 4px}
+.note-del:hover{color:var(--red)}
+.add-note{display:flex;gap:8px}
+.add-note textarea{flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:4px;font-family:var(--serif);font-size:0.85rem;resize:none;height:56px;background:#fff;color:var(--ink)}
+.add-note textarea:focus{outline:none;border-color:var(--navy)}
+.add-note button{padding:8px 14px;background:var(--navy);color:#fff;border:none;border-radius:4px;font-family:var(--serif);font-size:0.82rem;cursor:pointer;align-self:flex-end}
+.notes-title{font-size:0.7rem;font-family:var(--mono);color:var(--ink-f);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.8rem}
+.empty-note{font-size:0.8rem;color:var(--ink-f);font-family:var(--mono);padding:6px 0}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:4px;padding:1.6rem;width:310px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.modal h3{font-size:0.95rem;font-weight:400;color:var(--navy);margin-bottom:.25rem}
+.modal p{font-size:0.68rem;color:var(--ink-f);font-family:var(--mono);margin-bottom:1rem}
+.sd{font-size:2.6rem;font-weight:300;color:var(--navy);text-align:center;margin-bottom:.3rem;font-family:var(--serif)}
+input[type=range]{width:100%;accent-color:var(--navy);cursor:pointer}
+.ma{display:flex;gap:8px;justify-content:flex-end;margin-top:1.2rem}
+.bc{padding:6px 13px;border:1px solid var(--border);border-radius:3px;background:none;font-family:var(--serif);cursor:pointer;color:var(--ink-m);font-size:.82rem}
+.bs{padding:6px 16px;background:var(--navy);color:#fff;border:none;border-radius:3px;font-family:var(--serif);cursor:pointer;font-size:.82rem}
+footer{text-align:center;padding:1.5rem;font-size:0.65rem;font-family:var(--mono);color:var(--ink-f);letter-spacing:.05em;border-top:1px solid var(--border);margin-top:2rem}
+@media(max-width:560px){.score-grid{grid-template-columns:1fr 110px 110px}main{padding:1.2rem 1rem}.rank-bar{grid-template-columns:110px 1fr 24px}.note-item{grid-template-columns:1fr auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="title-block">
+    <h1>Retraite — <em>Athènes · Marseille</em></h1>
+    <p>outil de décision partagé · étienne & nina</p>
+  </div>
+  <div class="user-select">
+    <span class="user-label">je suis</span>
+    <button class="user-btn active" id="btn-e" onclick="setUser('Étienne')">Étienne</button>
+    <button class="user-btn" id="btn-n" onclick="setUser('Nina')">Nina</button>
+  </div>
+</header>
+
+<div class="sync-bar">
+  <div class="sync-dot" id="sync-dot"></div>
+  <span id="sync-status">connexion…</span>
+</div>
+
+<main>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('scorecard',this)">Scorecard</button>
+    <button class="tab-btn" onclick="showTab('ranking',this)">Analyse</button>
+    <button class="tab-btn" onclick="showTab('detail',this)">Détail</button>
+    <button class="tab-btn" onclick="showTab('notes',this)">Notes</button>
+  </div>
+  <div id="scorecard" class="panel active"><div class="score-grid" id="score-grid"></div></div>
+  <div id="ranking" class="panel"><div id="ranking-wrap"></div></div>
+  <div id="detail" class="panel"><div id="detail-grid"></div></div>
+  <div id="notes" class="panel">
+    <div class="notes-title">Notes & réflexions partagées</div>
+    <div class="notes-list" id="notes-list"></div>
+    <div class="add-note">
+      <textarea id="note-input" placeholder="Ajouter une réflexion…"></textarea>
+      <button onclick="addNote()">Ajouter</button>
+    </div>
+  </div>
+</main>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="modal-title"></h3><p id="modal-sub"></p>
+    <div class="sd" id="score-display">7</div>
+    <input type="range" min="1" max="10" value="7" id="score-slider" oninput="updateSlider(this.value)">
+    <div class="ma">
+      <button class="bc" onclick="closeModal()">Annuler</button>
+      <button class="bs" onclick="saveScore()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<footer>synchronisation automatique · partagé entre étienne & nina</footer>
+
+<script>
+const BIN_ID = '69d238e2856a682189ff6399';
+const API_KEY = '$2a$10$OfoQC5wY0QywVsTs6PprhuCrlSG31D7Ypxk8nOAE6BRP5ISVR1k8a';
+const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+const DEFAULT = {
+  version: 2,
+  destinations: [
+    {id:"a", label:"Athènes", emoji:"🇬🇷"},
+    {id:"m", label:"Marseille", emoji:"🇫🇷"}
+  ],
+  criteria: [
+    {id:"cout",    label:"Coût de la vie",       weight:4, scores:{a:8,m:6},
+     note:"Athènes ~800€/mois hors loyer. Marseille ~1000€/mois. Athènes 20-25% moins cher."},
+    {id:"sante",   label:"Accès santé",           weight:5, scores:{a:5,m:8},
+     note:"France: système universel mature. Grèce: public sous-financé (27% satisfaction OCDE vs 64%), privé de qualité à Athènes mais payant."},
+    {id:"vols",    label:"Vol direct Stockholm",  weight:3, scores:{a:9,m:3},
+     note:"Athènes: 3 compagnies (Aegean, SAS, Norwegian), ~10 vols/semaine, 3h45. Marseille: Ryanair 1 vol/semaine seulement."},
+    {id:"immo",    label:"Prix €/m²",             weight:3, scores:{a:8,m:5},
+     note:"Athènes centre: ~2500-3000€/m². Marseille: ~3500€ en moyenne, 5000-6000€ dans les 7e/8e (Cité Radieuse)."},
+    {id:"gastro",  label:"Gastronomie",            weight:3, scores:{a:7,m:9},
+     note:"Marseille: bouillabaisse, Noailles, influence nord-africaine. Athènes: tavernas exceptionnelles, produits locaux, moins de diversité internationale."},
+    {id:"liens",   label:"Probabilité de liens",  weight:5, scores:{a:5,m:9},
+     note:"Marseille: langue native, culture du lien fort, communautés intellectuelles actives. Athènes: barrière langue, philoxenia mais intégration plus difficile pour un retraité francophone."},
+    {id:"voiture", label:"Vivre sans voiture",    weight:3, scores:{a:7,m:7},
+     note:"Athènes: centre compact et marchable, 3 lignes de métro, trottoirs parfois dégradés. Marseille: transports GRATUITS après 65 ans (sept. 2025), 200 stations VAE, mais ville encore voiture-dépendante hors centre."}
+  ],
+  notes: [],
+  lastModifiedBy: null,
+  lastModifiedAt: null
+};
+
+let S = JSON.parse(JSON.stringify(DEFAULT));
+let eC = null, eD = null, currentUser = 'Étienne';
+let lastKnownAt = null;
+
+function sc(s){return s>=8?'#2D6A4F':s>=6?'#B8860B':'#8B2020'}
+function wt(id){let s=0,w=0;S.criteria.forEach(c=>{s+=c.scores[id]*c.weight;w+=c.weight});return Math.round(s/w*10)/10}
+
+// --- JSONBin API ---
+async function loadFromBin() {
+  setSyncing();
+  try {
+    const res = await fetch(API_URL + '/latest', {
+      headers: {'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false'}
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.version) {
+        S = {...DEFAULT, ...data, criteria: data.criteria || DEFAULT.criteria, notes: data.notes || []};
+        lastKnownAt = S.lastModifiedAt;
+      }
+      setSynced();
+    } else {
+      // Bin vide ou première utilisation — on initialise
+      await saveToBin();
+    }
+  } catch(e) {
+    setError('hors ligne — modifications locales uniquement');
+  }
+  renderAll();
+}
+
+async function saveToBin() {
+  setSyncing();
+  S.lastModifiedBy = currentUser;
+  S.lastModifiedAt = new Date().toISOString();
+  lastKnownAt = S.lastModifiedAt;
+  try {
+    const res = await fetch(API_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY
+      },
+      body: JSON.stringify(S)
+    });
+    if (res.ok) { setSynced(); } else { setError('erreur de sauvegarde'); }
+  } catch(e) {
+    setError('hors ligne — réessayez');
+  }
+  renderAll();
+}
+
+async function pollForUpdates() {
+  try {
+    const res = await fetch(API_URL + '/latest', {
+      headers: {'X-Master-Key': API_KEY, 'X-Bin-Meta': 'false'}
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.lastModifiedAt && data.lastModifiedAt !== lastKnownAt) {
+        S = {...DEFAULT, ...data, criteria: data.criteria || DEFAULT.criteria, notes: data.notes || []};
+        lastKnownAt = S.lastModifiedAt;
+        setSynced();
+        renderAll();
+      }
+    }
+  } catch(e) {}
+}
+
+function setSyncing(){
+  document.getElementById('sync-dot').className='sync-dot syncing';
+  document.getElementById('sync-status').textContent='synchronisation…';
+}
+function setSynced(){
+  document.getElementById('sync-dot').className='sync-dot synced';
+  const who=S.lastModifiedBy, when=S.lastModifiedAt
+    ? new Date(S.lastModifiedAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})
+    : '';
+  document.getElementById('sync-status').textContent = who
+    ? `synchronisé · dernière modif par ${who} à ${when}`
+    : 'synchronisé';
+}
+function setError(msg){
+  document.getElementById('sync-dot').className='sync-dot error';
+  document.getElementById('sync-status').textContent=msg;
+}
+
+// --- RENDER ---
+function renderAll(){renderScorecard();renderRanking();renderDetail();renderNotes()}
+
+function renderScorecard(){
+  let h=`<div class="sg-header">Critère</div>`;
+  S.destinations.forEach(d=>h+=`<div class="sg-header dest">${d.emoji} ${d.label}</div>`);
+  S.criteria.forEach(c=>{
+    h+=`<div class="sg-crit"><div class="cn">${c.label}</div><div class="cw">poids ×${c.weight}</div></div>`;
+    S.destinations.forEach(d=>{
+      const s=c.scores[d.id];
+      h+=`<div class="sg-score" onclick="openModal('${c.id}','${d.id}')"><span class="badge" style="background:${sc(s)}">${s}</span><span class="edit-h">✎</span></div>`;
+    });
+  });
+  h+=`<div style="display:contents"><div class="total-crit"><div class="tl">Total pondéré</div></div>`;
+  S.destinations.forEach(d=>h+=`<div class="total-score"><div class="tv">${wt(d.id)}</div></div>`);
+  h+=`</div>`;
+  document.getElementById('score-grid').innerHTML=h;
+}
+
+function renderRanking(){
+  const tots=S.destinations.map(d=>({...d,total:wt(d.id)})).sort((a,b)=>b.total-a.total);
+  let h='';
+  tots.forEach(d=>{
+    h+=`<div class="rank-dest"><div class="rank-name">${d.emoji} ${d.label}<span class="rank-total">— ${d.total}/10</span></div>`;
+    S.criteria.forEach(c=>{
+      const s=c.scores[d.id];
+      h+=`<div class="rank-bar"><div class="rcn">${c.label}</div><div class="rtrack"><div class="rfill" style="width:${s*10}%;background:${sc(s)}"></div></div><div class="rv">${s}</div></div>`;
+    });
+    h+=`</div>`;
+  });
+  document.getElementById('ranking-wrap').innerHTML=h;
+}
+
+function renderDetail(){
+  let h='';
+  S.criteria.forEach(c=>{
+    h+=`<div class="detail-item">
+      <div class="detail-head" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span class="dhn">${c.label}</span><span class="dhw">poids ×${c.weight} ▸</span>
+      </div>
+      <div class="detail-body"><div>${c.note||''}</div><div class="detail-scores">`;
+    S.destinations.forEach(d=>{
+      const s=c.scores[d.id];
+      h+=`<span class="ds-item"><span class="ds-badge" style="background:${sc(s)}">${s}</span><span style="color:var(--ink-m)">${d.emoji} ${d.label}</span></span>`;
+    });
+    h+=`</div></div></div>`;
+  });
+  document.getElementById('detail-grid').innerHTML=h;
+}
+
+function renderNotes(){
+  const list=document.getElementById('notes-list');
+  if(!S.notes||!S.notes.length){
+    list.innerHTML=`<p class="empty-note">aucune note pour l'instant</p>`;return;
+  }
+  let h='';
+  S.notes.forEach((n,i)=>{
+    const when=new Date(n.at).toLocaleDateString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    h+=`<div class="note-item">
+      <div class="note-author"><strong>${n.author}</strong>${when}</div>
+      <div class="note-text">${n.text}</div>
+      <button class="note-del" onclick="delNote(${i})">✕</button>
+    </div>`;
+  });
+  list.innerHTML=h;
+}
+
+// --- INTERACTIONS ---
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
+}
+function setUser(n){
+  currentUser=n;
+  document.getElementById('btn-e').classList.toggle('active',n==='Étienne');
+  document.getElementById('btn-n').classList.toggle('active',n==='Nina');
+}
+function openModal(cid,did){
+  eC=cid;eD=did;
+  const c=S.criteria.find(x=>x.id===cid),d=S.destinations.find(x=>x.id===did),s=c.scores[did];
+  document.getElementById('modal-title').textContent=c.label;
+  document.getElementById('modal-sub').textContent=`${d.emoji} ${d.label} · ${currentUser}`;
+  document.getElementById('score-slider').value=s;
+  document.getElementById('score-display').textContent=s;
+  document.getElementById('score-display').style.color=sc(s);
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');eC=null;eD=null}
+function updateSlider(v){document.getElementById('score-display').textContent=v;document.getElementById('score-display').style.color=sc(parseInt(v))}
+function saveScore(){
+  if(!eC||!eD)return;
+  S.criteria.find(x=>x.id===eC).scores[eD]=parseInt(document.getElementById('score-slider').value);
+  closeModal();saveToBin();
+}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+function addNote(){
+  const inp=document.getElementById('note-input'),txt=inp.value.trim();
+  if(!txt)return;
+  if(!S.notes)S.notes=[];
+  S.notes.push({author:currentUser,text:txt,at:new Date().toISOString()});
+  inp.value='';saveToBin();
+}
+function delNote(i){S.notes.splice(i,1);saveToBin()}
+
+// --- INIT ---
+loadFromBin();
+setInterval(pollForUpdates, 15000);
+</script>
+</body>
+</html>

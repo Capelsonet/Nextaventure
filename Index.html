@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Retraite — Athènes · Marseille</title>
+<title>Retraite — Athènes · Marseille · Stockholm</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#1B2A4A;--navy-l:#2a3f6a;--gold:#C9A84C;--cream:#F5F1E8;--cream-d:#EDE8DB;--ink:#1a1a1a;--ink-m:#5a5a5a;--ink-f:#9a9a9a;--green:#2D6A4F;--amber:#B8860B;--red:#8B2020;--border:rgba(26,42,74,0.12);--serif:'Cormorant Garamond',Georgia,serif;--mono:'DM Mono',monospace}
+:root{--navy:#1B2A4A;--gold:#C9A84C;--cream:#F5F1E8;--cream-d:#EDE8DB;--ink:#1a1a1a;--ink-m:#5a5a5a;--ink-f:#9a9a9a;--green:#2D6A4F;--amber:#B8860B;--red:#8B2020;--border:rgba(26,42,74,0.12);--serif:'Cormorant Garamond',Georgia,serif;--mono:'DM Mono',monospace;--sto-bg:#f0f0ee;--sto-border:#c8c8c4}
 html,body{background:var(--cream);color:var(--ink);font-family:var(--serif);min-height:100vh}
 header{border-bottom:1px solid var(--border);padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;background:#fff;flex-wrap:wrap;gap:12px}
-.title-block h1{font-size:1.5rem;font-weight:300;letter-spacing:-0.02em;color:var(--navy)}
+.title-block h1{font-size:1.45rem;font-weight:300;letter-spacing:-0.02em;color:var(--navy)}
 .title-block h1 em{font-style:italic;color:var(--gold)}
 .title-block p{margin-top:3px;font-size:0.67rem;font-family:var(--mono);color:var(--ink-f)}
 .user-select{display:flex;gap:6px;align-items:center}
@@ -18,124 +18,135 @@ header{border-bottom:1px solid var(--border);padding:1.2rem 2rem;display:flex;ju
 .user-btn{padding:5px 14px;border:1px solid var(--border);border-radius:2px;background:transparent;font-family:var(--serif);font-size:0.82rem;cursor:pointer;color:var(--ink-m);transition:all .2s}
 .user-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .sync-bar{background:var(--cream-d);border-bottom:1px solid var(--border);padding:5px 2rem;font-family:var(--mono);font-size:0.67rem;color:var(--ink-f);display:flex;align-items:center;gap:7px}
-.sync-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;transition:background .3s;background:var(--ink-f)}
+.sync-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--ink-f);transition:background .3s}
 .sync-dot.synced{background:var(--green)}.sync-dot.syncing{background:var(--amber);animation:pulse 1s infinite}.sync-dot.error{background:var(--red)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-main{max-width:980px;margin:0 auto;padding:1.8rem 1.5rem}
+main{max-width:1040px;margin:0 auto;padding:1.8rem 1.5rem}
 .tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.8rem;flex-wrap:wrap}
-.tab-btn{padding:7px 15px;border:none;background:none;font-family:var(--serif);font-size:0.85rem;color:var(--ink-m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;white-space:nowrap}
+.tab-btn{padding:7px 14px;border:none;background:none;font-family:var(--serif);font-size:0.84rem;color:var(--ink-m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;white-space:nowrap}
 .tab-btn.active{color:var(--navy);border-bottom-color:var(--gold);font-weight:500}
 .panel{display:none}.panel.active{display:block}
 
-/* SCORECARD */
-.score-grid{display:grid;grid-template-columns:1fr 155px 155px;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#fff}
-.sg-h{background:var(--navy);color:#fff;padding:9px 13px;font-size:0.67rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+/* ── SCORECARD ─────────────────────────────────────────────────────────── */
+.score-grid{display:grid;grid-template-columns:1fr 120px 120px 120px;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#fff}
+.sg-h{background:var(--navy);color:#fff;padding:9px 12px;font-size:0.66rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
 .sg-h.dest{text-align:center;border-left:1px solid rgba(255,255,255,.1)}
-.sg-crit{padding:10px 13px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
-.sg-score-cell{padding:9px 13px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
-.sg-score-cell:last-child{border-right:none}
-.cn{font-size:0.86rem;color:var(--ink);line-height:1.3}
-.cw-row{display:flex;align-items:center;gap:8px;margin-top:3px;flex-wrap:wrap}
-.cw{font-size:0.6rem;font-family:var(--mono);color:var(--ink-f)}
-.weight-pill{font-size:0.58rem;font-family:var(--mono);padding:1px 6px;border-radius:8px;color:#fff}
-.weight-pill.e{background:var(--navy)}
-.weight-pill.n{background:var(--gold);color:var(--navy)}
-.weight-pill.avg{background:var(--ink-m)}
-.score-badge{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:500;color:#fff}
-.total-crit{background:var(--navy);padding:10px 13px;border-right:1px solid rgba(255,255,255,.1)}
-.total-score-cell{background:var(--navy);padding:9px 13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-right:1px solid rgba(255,255,255,.1)}
-.total-score-cell:last-child{border-right:none}
-.tl{font-size:0.6rem;font-family:var(--mono);color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase}
-.tv{font-size:1.5rem;font-weight:300;color:var(--gold)}
-.tv-sub{display:flex;gap:8px}
-.tv-mp{font-size:0.58rem;font-family:var(--mono);color:rgba(255,255,255,.4)}
+.sg-h.sto{background:#4a4a46;text-align:center;border-left:1px solid rgba(255,255,255,.1)}
+.sg-crit{padding:10px 12px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+.sg-cell{padding:8px 10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.sg-cell:last-child{border-right:none}
+.sg-cell.sto-cell{background:var(--sto-bg);border-right:1px solid var(--sto-border)}
+.cn{font-size:0.85rem;color:var(--ink);line-height:1.3}
+.cw-row{display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap}
+.cw{font-size:0.59rem;font-family:var(--mono);color:var(--ink-f)}
+.wp{font-size:0.57rem;font-family:var(--mono);padding:1px 5px;border-radius:7px;color:#fff}
+.wp.e{background:var(--navy)}.wp.n{background:var(--gold);color:var(--navy)}.wp.avg{background:var(--ink-m)}
+.score-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:500;color:#fff}
+.sto-badge{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:500;color:#fff;opacity:.75}
+.delta{font-size:0.6rem;font-family:var(--mono);font-weight:500}
+.delta.pos{color:var(--green)}.delta.neg{color:var(--red)}.delta.neu{color:var(--ink-f)}
+.total-crit{background:var(--navy);padding:10px 12px;border-right:1px solid rgba(255,255,255,.1)}
+.total-cell{background:var(--navy);padding:8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-right:1px solid rgba(255,255,255,.1)}
+.total-cell:last-child{border-right:none}
+.total-cell.sto-total{background:#4a4a46}
+.tl{font-size:0.59rem;font-family:var(--mono);color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase}
+.tv{font-size:1.4rem;font-weight:300;color:var(--gold)}
+.tv.sto{color:#c8c8c0;font-size:1.4rem;font-weight:300}
+.tv-sub{display:flex;gap:6px}
+.tv-mp{font-size:0.57rem;font-family:var(--mono);color:rgba(255,255,255,.38)}
+.tv-delta{font-size:0.65rem;font-family:var(--mono);font-weight:500}
+.tv-delta.pos{color:#7dd3b0}.tv-delta.neg{color:#f08080}
 
-/* WEIGHTS PANEL */
-.weights-intro{font-size:0.8rem;color:var(--ink-m);margin-bottom:1.2rem;line-height:1.6;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:4px}
+/* ── WEIGHTS ───────────────────────────────────────────────────────────── */
+.weights-intro{font-size:0.79rem;color:var(--ink-m);margin-bottom:1.2rem;line-height:1.6;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:4px}
 .weights-intro strong{color:var(--navy)}
-.weights-table{border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#fff}
-.wt-header{display:grid;grid-template-columns:1fr 180px 180px 80px;background:var(--navy);color:#fff;padding:9px 14px;font-size:0.67rem;font-family:var(--mono);letter-spacing:.07em;text-transform:uppercase;gap:12px}
-.wt-row{display:grid;grid-template-columns:1fr 180px 180px 80px;padding:11px 14px;border-bottom:1px solid var(--border);gap:12px;align-items:center}
+.wt-table{border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#fff}
+.wt-hrow{display:grid;grid-template-columns:1fr 170px 170px 70px;background:var(--navy);color:#fff;padding:8px 14px;font-size:0.66rem;font-family:var(--mono);letter-spacing:.07em;text-transform:uppercase;gap:10px}
+.wt-row{display:grid;grid-template-columns:1fr 170px 170px 70px;padding:10px 14px;border-bottom:1px solid var(--border);gap:10px;align-items:center}
 .wt-row:last-child{border-bottom:none}
 .wt-row:hover{background:var(--cream)}
-.wt-name{font-size:0.88rem;color:var(--ink)}
-.wt-slider-wrap{display:flex;align-items:center;gap:8px}
-.wt-slider-wrap input{flex:1;accent-color:var(--navy)}
-.wt-slider-wrap.nina input{accent-color:var(--gold)}
-.wt-val{font-size:0.8rem;font-family:var(--mono);font-weight:500;min-width:20px}
-.wt-val.e{color:var(--navy)}
-.wt-val.n{color:var(--amber)}
-.wt-avg{font-size:0.78rem;font-family:var(--mono);color:var(--ink-m);text-align:center}
+.wt-name{font-size:0.86rem;color:var(--ink)}
+.wt-sw{display:flex;align-items:center;gap:8px}
+.wt-sw input{flex:1;accent-color:var(--navy)}
+.wt-sw.nina input{accent-color:var(--gold)}
+.wt-val{font-size:0.78rem;font-family:var(--mono);font-weight:500;min-width:18px}
+.wt-val.e{color:var(--navy)}.wt-val.n{color:var(--amber)}
+.wt-avg{font-size:0.76rem;font-family:var(--mono);color:var(--ink-m);text-align:center}
 
-/* DIVERGENCE */
-.diverg-intro{font-size:0.8rem;color:var(--ink-m);margin-bottom:1.2rem;line-height:1.6}
-.legend{display:flex;gap:16px;margin-bottom:1.2rem;font-size:0.7rem;font-family:var(--mono);color:var(--ink-m);flex-wrap:wrap}
-.leg-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:5px;vertical-align:middle}
-.diverg-item{background:#fff;border:1px solid var(--border);border-radius:4px;padding:12px 14px;margin-bottom:7px}
-.diverg-crit-name{font-size:0.88rem;font-weight:500;color:var(--navy);margin-bottom:8px}
-.diverg-dest-block{margin-bottom:6px}
-.diverg-dest-label{font-size:0.63rem;font-family:var(--mono);color:var(--ink-f);margin-bottom:3px}
-.diverg-bar-row{display:grid;grid-template-columns:60px 1fr 60px;align-items:center;gap:8px;margin-bottom:3px}
-.diverg-person{font-size:0.67rem;font-family:var(--mono);color:var(--ink-m)}
-.diverg-track{height:12px;background:var(--cream-d);border-radius:2px;overflow:hidden;position:relative}
-.bar-e{height:100%;border-radius:2px;background:var(--navy);position:absolute;top:0;left:0;transition:width .5s}
-.bar-n{height:6px;border-radius:2px;background:var(--gold);position:absolute;bottom:0;left:0;transition:width .5s}
-.diverg-score{font-size:0.7rem;font-family:var(--mono);font-weight:500;text-align:right}
+/* ── DIVERGENCE ────────────────────────────────────────────────────────── */
+.diverg-intro{font-size:0.79rem;color:var(--ink-m);margin-bottom:1rem;line-height:1.6}
+.legend{display:flex;gap:14px;margin-bottom:1rem;font-size:0.68rem;font-family:var(--mono);color:var(--ink-m);flex-wrap:wrap}
+.leg-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+.div-item{background:#fff;border:1px solid var(--border);border-radius:4px;padding:12px 14px;margin-bottom:6px}
+.div-crit-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.div-crit-name{font-size:0.87rem;font-weight:500;color:var(--navy)}
+.div-gap-tag{font-size:0.65rem;font-family:var(--mono);padding:2px 7px;border-radius:8px}
+.div-gap-tag.agree{background:rgba(45,106,79,.12);color:var(--green)}
+.div-gap-tag.mild{background:rgba(184,134,11,.12);color:var(--amber)}
+.div-gap-tag.strong{background:rgba(139,32,32,.12);color:var(--red)}
+.div-bar-row{display:grid;grid-template-columns:52px 1fr 40px;align-items:center;gap:7px;margin-bottom:3px}
+.div-person{font-size:0.65rem;font-family:var(--mono);color:var(--ink-m)}
+.div-track{height:11px;background:var(--cream-d);border-radius:2px;overflow:hidden}
+.div-fill{height:100%;border-radius:2px;transition:width .5s}
+.div-score-row{display:flex;gap:14px;padding-top:8px;border-top:1px solid var(--border);flex-wrap:wrap}
+.div-score-dest{font-size:0.7rem;font-family:var(--mono);color:var(--ink-m)}
 
-/* DETAIL */
-.detail-item{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:7px}
-.detail-head{padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--cream-d)}
-.dhn{font-size:0.88rem;font-weight:500;color:var(--navy)}
-.dhw{font-size:0.62rem;font-family:var(--mono);color:var(--ink-f)}
-.detail-body{display:none;padding:14px 16px;font-size:0.81rem;color:var(--ink-m);line-height:1.65}
-.detail-body.open{display:block}
-.d-ctx{font-size:0.7rem;font-family:var(--mono);color:var(--ink-f);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);font-style:italic}
-.d-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px}
-.d-col-title{font-size:0.62rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-f);margin-bottom:5px}
-.d-rat{margin-top:6px;font-size:0.73rem;color:var(--ink-f);font-style:italic}
-.d-scores-row{display:flex;align-items:center;gap:14px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
-.ds-item{display:flex;align-items:center;gap:7px}
-.ds-badge{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:500;color:#fff}
-.ds-dest{font-size:0.72rem;color:var(--ink-m)}
-.ds-rat{font-size:0.63rem;font-family:var(--mono);color:var(--ink-f)}
-.d-verdict{margin-left:auto;font-size:0.7rem;font-family:var(--mono);color:var(--ink-f)}
+/* ── DETAIL ────────────────────────────────────────────────────────────── */
+.det-item{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:7px}
+.det-head{padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--cream-d)}
+.det-name{font-size:0.88rem;font-weight:500;color:var(--navy)}
+.det-meta{font-size:0.62rem;font-family:var(--mono);color:var(--ink-f)}
+.det-body{display:none;padding:14px 16px;font-size:0.8rem;color:var(--ink-m);line-height:1.65}
+.det-body.open{display:block}
+.det-ctx{font-size:0.69rem;font-family:var(--mono);color:var(--ink-f);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);font-style:italic}
+.det-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:12px}
+.det-col-title{font-size:0.61rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-f);margin-bottom:5px}
+.det-col-title.sto{color:#888}
+.det-col.sto-col{opacity:.8}
+.det-rat{margin-top:6px;font-size:0.72rem;color:var(--ink-f);font-style:italic}
+.det-scores-row{display:flex;align-items:center;gap:12px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap}
+.ds-item{display:flex;align-items:center;gap:6px}
+.ds-badge{width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:500;color:#fff}
+.ds-badge.sto{opacity:.7}
+.ds-dest{font-size:0.7rem;color:var(--ink-m)}
+.ds-rat{font-size:0.62rem;font-family:var(--mono);color:var(--ink-f)}
+.det-verdict{margin-left:auto;font-size:0.68rem;font-family:var(--mono);color:var(--ink-f)}
 
-/* NOTES */
+/* ── NOTES ─────────────────────────────────────────────────────────────── */
 .notes-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem}
-.note-item{display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:start;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:4px}
+.note-item{display:grid;grid-template-columns:115px 1fr auto;gap:10px;align-items:start;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:4px}
 .note-author{font-size:0.67rem;font-family:var(--mono);color:var(--ink-f)}
 .note-author strong{color:var(--navy);display:block;margin-bottom:2px}
 .note-text{font-size:0.84rem;color:var(--ink);line-height:1.5}
-.note-del{background:none;border:none;color:var(--ink-f);cursor:pointer;font-size:0.75rem;padding:0 4px}
+.note-del{background:none;border:none;color:var(--ink-f);cursor:pointer;font-size:0.75rem}
 .note-del:hover{color:var(--red)}
 .add-note{display:flex;gap:8px}
-.add-note textarea{flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:4px;font-family:var(--serif);font-size:0.84rem;resize:none;height:56px;background:#fff;color:var(--ink)}
+.add-note textarea{flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:4px;font-family:var(--serif);font-size:0.84rem;resize:none;height:54px;background:#fff;color:var(--ink)}
 .add-note textarea:focus{outline:none;border-color:var(--navy)}
 .add-note button{padding:8px 14px;background:var(--navy);color:#fff;border:none;border-radius:4px;font-family:var(--serif);font-size:0.82rem;cursor:pointer;align-self:flex-end}
 .notes-title{font-size:0.68rem;font-family:var(--mono);color:var(--ink-f);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.8rem}
 .empty-note{font-size:0.78rem;color:var(--ink-f);font-family:var(--mono);padding:6px 0}
 
-/* MODAL */
+/* ── MODAL ─────────────────────────────────────────────────────────────── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:#fff;border-radius:4px;padding:1.6rem;width:320px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-.modal h3{font-size:0.95rem;font-weight:400;color:var(--navy);margin-bottom:.2rem}
-.modal p{font-size:0.67rem;color:var(--ink-f);font-family:var(--mono);margin-bottom:1rem}
-.modal-score-display{font-size:2.4rem;font-weight:300;text-align:center;margin-bottom:.3rem;font-family:var(--serif)}
+.modal{background:#fff;border-radius:4px;padding:1.5rem;width:310px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.modal h3{font-size:0.93rem;font-weight:400;color:var(--navy);margin-bottom:.2rem}
+.modal p{font-size:0.66rem;color:var(--ink-f);font-family:var(--mono);margin-bottom:1rem}
+.modal-val{font-size:2.4rem;font-weight:300;text-align:center;margin-bottom:.3rem;font-family:var(--serif)}
 input[type=range]{width:100%;accent-color:var(--navy);cursor:pointer}
-.range-labels{display:flex;justify-content:space-between;font-size:0.6rem;font-family:var(--mono);color:var(--ink-f);margin-top:3px}
+.range-labels{display:flex;justify-content:space-between;font-size:0.59rem;font-family:var(--mono);color:var(--ink-f);margin-top:3px}
 .ma{display:flex;gap:8px;justify-content:flex-end;margin-top:1.2rem}
-.bc{padding:6px 13px;border:1px solid var(--border);border-radius:3px;background:none;font-family:var(--serif);cursor:pointer;color:var(--ink-m);font-size:.82rem}
+.bc{padding:6px 12px;border:1px solid var(--border);border-radius:3px;background:none;font-family:var(--serif);cursor:pointer;color:var(--ink-m);font-size:.82rem}
 .bs{padding:6px 16px;background:var(--navy);color:#fff;border:none;border-radius:3px;font-family:var(--serif);cursor:pointer;font-size:.82rem}
 
 footer{text-align:center;padding:1.5rem;font-size:0.63rem;font-family:var(--mono);color:var(--ink-f);letter-spacing:.05em;border-top:1px solid var(--border);margin-top:2rem}
-@media(max-width:600px){
-  .score-grid{grid-template-columns:1fr 105px 105px}
+@media(max-width:640px){
+  .score-grid{grid-template-columns:1fr 90px 90px 90px}
   main{padding:1.2rem .8rem}
-  .rank-bar{grid-template-columns:100px 1fr 24px}
-  .d-cols{grid-template-columns:1fr}
+  .det-cols{grid-template-columns:1fr}
+  .wt-hrow,.wt-row{grid-template-columns:1fr 1fr 1fr 45px}
   .note-item{grid-template-columns:1fr auto}.note-author{display:none}
-  .wt-header,.wt-row{grid-template-columns:1fr 1fr 1fr 50px}
 }
 </style>
 </head>
@@ -143,8 +154,8 @@ footer{text-align:center;padding:1.5rem;font-size:0.63rem;font-family:var(--mono
 
 <header>
   <div class="title-block">
-    <h1>Retraite — <em>Athènes · Marseille</em></h1>
-    <p>outil de décision partagé · étienne & nina</p>
+    <h1>Retraite — <em>Athènes · Marseille</em> · Stockholm</h1>
+    <p>outil de décision partagé · étienne & nina · scores fixes · poids personnels</p>
   </div>
   <div class="user-select">
     <span class="user-label">je suis</span>
@@ -169,21 +180,21 @@ footer{text-align:center;padding:1.5rem;font-size:0.63rem;font-family:var(--mono
 
   <div id="scorecard" class="panel active"><div class="score-grid" id="score-grid"></div></div>
   <div id="weights" class="panel">
-    <div class="weights-intro">Ajuste l'importance de chaque critère selon tes priorités. <strong>Les poids d'Étienne et Nina sont indépendants</strong> — le total pondéré utilise leur moyenne. Seul ton propre curseur est modifiable.</div>
-    <div class="weights-table">
-      <div class="wt-header"><div>Critère</div><div>Étienne</div><div>Nina</div><div>Moy.</div></div>
-      <div id="weights-rows"></div>
+    <div class="weights-intro">Ajuste l'importance de chaque critère selon tes priorités. <strong>Seule ta colonne est modifiable.</strong> Le total pondéré utilise la moyenne de vos deux poids.</div>
+    <div class="wt-table">
+      <div class="wt-hrow"><div>Critère</div><div>Étienne</div><div>Nina</div><div>Moy.</div></div>
+      <div id="wt-rows"></div>
     </div>
   </div>
   <div id="divergence" class="panel">
-    <p class="diverg-intro">Là où vos poids divergent le plus — les critères à discuter ensemble.</p>
+    <p class="diverg-intro">Critères classés du plus grand désaccord au plus petit — les points à discuter ensemble.</p>
     <div class="legend">
       <span><span class="leg-dot" style="background:var(--navy)"></span>Étienne</span>
       <span><span class="leg-dot" style="background:var(--gold)"></span>Nina</span>
     </div>
-    <div id="diverg-list"></div>
+    <div id="div-list"></div>
   </div>
-  <div id="detail" class="panel"><div id="detail-grid"></div></div>
+  <div id="detail" class="panel"><div id="det-grid"></div></div>
   <div id="notes" class="panel">
     <div class="notes-title">Notes & réflexions partagées</div>
     <div class="notes-list" id="notes-list"></div>
@@ -197,8 +208,8 @@ footer{text-align:center;padding:1.5rem;font-size:0.63rem;font-family:var(--mono
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h3 id="modal-title"></h3><p id="modal-sub"></p>
-    <div class="modal-score-display" id="modal-score-val">4</div>
-    <input type="range" min="1" max="5" value="4" id="weight-slider" oninput="updateWSlider(this.value)">
+    <div class="modal-val" id="modal-val">4</div>
+    <input type="range" min="1" max="5" value="4" id="w-slider" oninput="updateWSlider(this.value)">
     <div class="range-labels"><span>1 — peu important</span><span>5 — crucial</span></div>
     <div class="ma">
       <button class="bc" onclick="closeModal()">Annuler</button>
@@ -207,125 +218,147 @@ footer{text-align:center;padding:1.5rem;font-size:0.63rem;font-family:var(--mono
   </div>
 </div>
 
-<footer>scores fixés par Claude · poids personnels par Étienne & Nina · sync toutes les 15s</footer>
+<footer>scores fixés par Claude · poids personnels par Étienne & Nina · Stockholm = référence statu quo · sync 15s</footer>
 
 <script>
 const BIN_ID='69d238e2856a682189ff6399';
 const API_KEY='$2a$10$OfoQC5wY0QywVsTs6PprhuCrlSG31D7Ypxk8nOAE6BRP5ISVR1k8a';
 const API_URL=`https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
-// ── RÉFÉRENCE IMMUABLE ──────────────────────────────────────────────────────
-const REF_CRITERIA=[
-  {id:"cout",label:"Coût de la vie",scores:{a:8,m:6},
-   context:"Dépenses mensuelles courantes hors loyer pour un couple retraité.",
-   detail:{a:"~800€/mois hors loyer (Numbeo). Restaurants pour deux ~25-35€. Épicerie locale très accessible. Pass transports 5 jours : 9€. Athènes 20-25% moins cher qu'une grande ville française.",m:"~1000€/mois hors loyer (Numbeo). 25-30% moins cher que Paris. Marchés locaux compétitifs. Une des grandes villes françaises les plus accessibles."},
-   rationale:{a:"Avantage net sur quasiment toutes les lignes budgétaires.",m:"Accessible pour la France, mais nettement au-dessus d'Athènes."}},
-  {id:"sante",label:"Accès santé",scores:{a:5,m:8},
-   context:"Qualité du système, accessibilité pour un résident EU, coût réel.",
-   detail:{a:"Système public ESY sous-financé : 27% satisfaction OCDE 2025 (moyenne 64%). 12.1% de besoins non satisfaits. Secteur privé de qualité à Athènes (Hygeia, Athens Medical Center), médecins anglophones. Assurance privée conseillée : 1000-3000€/an.",m:"Système universel français mature. CHU de la Timone reconnu. Remboursements sécu immédiats. Médecin traitant, spécialistes, hôpitaux — tout navigable."},
-   rationale:{a:"Risque réel sur le suivi régulier. Privé de qualité mais payant.",m:"Système fiable, prévisible, droits bien établis."}},
-  {id:"vols",label:"Vol direct Stockholm",scores:{a:9,m:3},
-   context:"Fréquence et facilité des vols directs depuis Stockholm Arlanda.",
-   detail:{a:"3 compagnies (Aegean, SAS, Norwegian) ~10 vols/semaine. Durée 3h45. Billets dès 48€ aller simple hors saison.",m:"Ryanair uniquement — 1 vol/semaine le mardi, saison limitée. Correspondance obligatoire via Paris/Amsterdam/Frankfurt : 4-6h, 150-300€."},
-   rationale:{a:"Connexion directe robuste, souplesse maximale.",m:"Contrainte logistique significative — chaque visite doit être planifiée."}},
-  {id:"immo",label:"Prix €/m²",scores:{a:8,m:5},
-   context:"Prix d'achat au m² pour un appartement de qualité dans les quartiers cibles.",
-   detail:{a:"Transactions réelles ~2480€/m² (Investropa Q1 2025). Koukaki, Pangrati : 2900-3500€/m². Pas de TVA ni taxe plus-value jusqu'à fin 2026.",m:"Médiane ~3500€/m² (SeLoger jan. 2026). 7e/8e arrondissement (cible Cité Radieuse) : 5000-6000€/m² voire plus. Hausse +26.9% en 5 ans."},
-   rationale:{a:"Budget d'achat nettement inférieur pour qualité équivalente.",m:"La Cité Radieuse est un rêve cher — budget significativement plus élevé."}},
-  {id:"gastro",label:"Gastronomie",scores:{a:7,m:9},
-   context:"Qualité, diversité et plaisir gastronomique au quotidien.",
-   detail:{a:"Tavernas, mézédès, poissons du Pirée, huile d'olive, fromages. Marché Varvakios remarquable. Cuisine de rue excellente (souvlaki, gyros). Moins de diversité internationale.",m:"Bouillabaisse, fruits de mer, marché du Noailles, influence nord-africaine et méditerranéenne. Forte culture du marché et du lien social autour de la table."},
-   rationale:{a:"Excellence de la tradition grecque, moins de diversité.",m:"Diversité, profondeur populaire et identité gastronomique forte."}},
-  {id:"liens",label:"Probabilité de liens",scores:{a:5,m:9},
-   context:"Capacité à créer de vraies amitiés et une communauté intellectuelle en tant qu'étranger.",
-   detail:{a:"Philoxenia réelle mais barrière langue significative pour l'intégration profonde. Communauté expat anglophone mais pas francophone. Clubs et associations en grec majoritairement.",m:"Langue commune = accès direct à la vie sociale. Culture méditerranéenne du lien vivante. Communautés intellectuelles actives (Friche, MuCEM). Ville de mélanges, favorable aux nouveaux arrivants."},
-   rationale:{a:"Intégration profonde nécessite le grec — barrière réelle à la retraite.",m:"Langue et culture du lien : conditions idéales pour une vraie vie sociale."}},
-  {id:"voiture",label:"Vivre sans voiture",scores:{a:7,m:7},
-   context:"Faisabilité d'une vie quotidienne sans voiture personnelle.",
-   detail:{a:"Centre très marchable. 3 lignes de métro + tram côtier + bus. Paiement sans contact 2025. Trottoirs souvent dégradés, chaleur estivale complique la marche juillet-août.",m:"Transports GRATUITS pour 65 ans et plus depuis sept. 2025 (RTM). 200 stations VAE leVélo. Ville encore voiture-dépendante dans beaucoup de quartiers."},
-   rationale:{a:"Faisable en centre, mais chaleur estivale complique la mobilité.",m:"Gratuité des transports après 65 ans change vraiment la donne."}},
-  {id:"culture",label:"Vie culturelle",scores:{a:7,m:9},
-   context:"Richesse culturelle accessible au quotidien — cinéma, théâtre, expositions, musique.",
-   detail:{a:"Festival Athènes-Épidaure (100+ productions, Ariane Mnouchkine et Juliette Binoche en 2025). Onassis Stegi, Musée Benaki, Fondation Goulandris. Cinémas de plein air l'été. Tout ou presque en grec.",m:"MuCEM, Friche la Belle de Mai (70 structures résidentes), Festival de Marseille (10€), Actoral. Tout en français. Scène intellectuelle active."},
-   rationale:{a:"Offre riche surtout l'été, barrière linguistique pour s'y engager vraiment.",m:"Accès complet en français, densité culturelle exceptionnelle."}},
-  {id:"climat",label:"Climat & confort physique",scores:{a:6,m:8},
-   context:"Qualité du climat sur 12 mois — chaleur supportable, confort au quotidien.",
-   detail:{a:"Hivers doux, printemps/automne excellents. Étés problématiques : canicules récurrentes 40-43°C (Acropole fermée plusieurs fois en 2025, record 16 jours en 2023). Athènes parmi les capitales européennes les plus vulnérables aux îlots de chaleur.",m:"Étés chauds mais rarement dangereux (max 35°C). ~300 jours de soleil/an. Le mistral vivifiant. Mer accessible d'avril à novembre. Nettement plus vivable en été qu'Athènes."},
-   rationale:{a:"Intersaisons superbes, mais étés de plus en plus dangereux après 65 ans.",m:"Confort thermique supérieur sur l'année entière."}},
-  {id:"nature",label:"Accès à la nature",scores:{a:6,m:8},
-   context:"Proximité de la nature, plein air, et accès équestre pour Nina.",
-   detail:{a:"Mer en tram (Glyfada). Collines autour d'Athènes. Excursions vers le Péloponnèse, îles du Golfe Saronique. Peu d'options équestres directes, voiture nécessaire.",m:"Calanques nationales à 15 min en bus. Camargue à 1h30 (chevaux sauvages). Luberon à 1h. Centres équestres en Crau, Alpilles. Arrière-pays provençal riche pour Nina."},
-   rationale:{a:"Belle nature accessible mais peu d'options équestres directes.",m:"Calanques + arrière-pays provençal pour Nina — avantage réel et concret."}},
-  {id:"fiscalite",label:"Fiscalité retraite",scores:{a:9,m:5},
-   context:"Traitement fiscal des pensions étrangères (suédoises) et des revenus d'investissement.",
-   detail:{a:"Flat tax 7% sur tous revenus étrangers (pensions, dividendes, intérêts) pendant 15 ans depuis 2020. Conditions : pas résident fiscal grec les 5 dernières années, convention fiscale Suède-Grèce applicable. Taux libératoire.",m:"Fiscalité française standard progressive. Pas de régime préférentiel pour retraités étrangers. Système connu, stable, prévisible."},
-   rationale:{a:"Avantage fiscal considérable — plusieurs milliers d'euros par an.",m:"Fiscalité normale française — aucun avantage spécifique."}},
-  {id:"admin",label:"Facilité administrative",scores:{a:4,m:9},
-   context:"Facilité de s'installer et naviguer la vie administrative au quotidien.",
-   detail:{a:"Bureaucratie complexe, lente, principalement en grec. AMKA, AFM, compte bancaire peuvent prendre des semaines à mois. Amélioration via TAXISnet mais reste laborieux. Nécessite souvent un intermédiaire local.",m:"Citoyen EU en France : zéro friction. Droits immédiatement applicables. Sécurité sociale, médecin traitant, impôts.gouv.fr — tout navigable seul en français."},
-   rationale:{a:"Installation significativement plus complexe.",m:"Démarches simples et prévisibles — énergie préservée pour l'essentiel."}},
-  {id:"famille",label:"Proximité de Téa",scores:{a:7,m:6},
-   context:"Facilité de voir Téa à Stockholm — fréquence, coût, spontanéité.",
-   detail:{a:"~10 vols directs/semaine (Aegean, SAS, Norwegian). Durée 3h45. Billets dès 48€. Connexion parmi les meilleures Méditerranée-Scandinavie.",m:"Pas de vol direct fiable. Correspondance obligatoire via Paris/Amsterdam : 4-6h, 150-300€. Alternative TGV Paris (3h) + vol. Faisable mais moins spontané."},
-   rationale:{a:"Connexion directe régulière — visites spontanées facilement envisageables.",m:"Moins direct mais faisable pour des visites planifiées."}}
+// ── DONNÉES DE RÉFÉRENCE (immuables) ─────────────────────────────────────
+const DESTS=[
+  {id:'a',label:'Athènes',emoji:'🇬🇷',ref:false},
+  {id:'m',label:'Marseille',emoji:'🇫🇷',ref:false},
+  {id:'s',label:'Stockholm',emoji:'🇸🇪',ref:true}
 ];
 
-const DEFAULT_WEIGHTS={etienne:4,nina:4};
+const CRITERIA=[
+  {id:"cout",label:"Coût de la vie",scores:{a:8,m:6,s:3},
+   context:"Dépenses mensuelles courantes hors loyer pour un couple retraité.",
+   detail:{a:"~800€/mois hors loyer (Numbeo). Transports 9€/5 jours. Produits locaux accessibles. 20-25% moins cher qu'une grande ville française.",
+           m:"~1000€/mois hors loyer. 25-30% moins cher que Paris. Marchés locaux compétitifs.",
+           s:"~2450€/mois hors loyer (Numbeo 2025). Restaurants chers, alcool taxé fortement. Parmi les 10% des villes les plus chères au monde."},
+   rationale:{a:"Avantage net sur toutes les lignes budgétaires.",m:"Accessible pour la France, mais au-dessus d'Athènes.",s:"Référence — votre niveau de vie actuel."}},
+  {id:"sante",label:"Accès santé",scores:{a:5,m:8,s:9},
+   context:"Qualité du système, accessibilité pour un résident EU, coût réel.",
+   detail:{a:"Système public sous-financé (27% satisfaction OCDE vs 64%). Secteur privé de qualité à Athènes mais payant. Assurance privée conseillée : 1000-3000€/an.",
+           m:"Système universel français mature. CHU de la Timone. Remboursements sécu immédiats.",
+           s:"5e mondial (CEOWORLD Health Care Index 2025). Espérance de vie suédoise : 73.8 ans (au-dessus moyenne mondiale). Soins financés par les impôts, accès universel."},
+   rationale:{a:"Risque réel sur le suivi régulier.",m:"Système fiable et prévisible.",s:"Référence — le meilleur que vous connaissez."}},
+  {id:"vols",label:"Vol direct Stockholm",scores:{a:9,m:3,s:10},
+   context:"Fréquence et facilité des vols directs depuis/vers Stockholm Arlanda.",
+   detail:{a:"3 compagnies (Aegean, SAS, Norwegian) ~10 vols/semaine. 3h45. Dès 48€ aller simple.",
+           m:"Ryanair uniquement — 1 vol/semaine le mardi, saison limitée. Correspondance souvent nécessaire : 4-6h.",
+           s:"Vous y êtes déjà. Téa est ici."},
+   rationale:{a:"Connexion directe robuste.",m:"Contrainte logistique réelle.",s:"Référence maximale — score 10 par définition."}},
+  {id:"immo",label:"Prix €/m²",scores:{a:8,m:5,s:1},
+   context:"Prix d'achat au m² pour un appartement de qualité dans les quartiers cibles.",
+   detail:{a:"Transactions réelles ~2480€/m² (Investropa Q1 2025). Koukaki, Pangrati : 2900-3500€/m².",
+           m:"Médiane ~3500€/m² (SeLoger jan. 2026). 7e/8e (cible Cité Radieuse) : 5000-6000€/m².",
+           s:"~7500€/m² en centre-ville (moyenne 2026). Östermalm, Vasastan : 9000-12000€/m². Parmi les 10 villes les plus chères d'Europe. Appartements bostadsrätt avec charges mensuelles (BRF)."},
+   rationale:{a:"Budget d'achat nettement inférieur.",m:"Cher pour la France.",s:"Le plus cher des trois — référence négative sur ce critère."}},
+  {id:"gastro",label:"Gastronomie",scores:{a:7,m:9,s:6},
+   context:"Qualité, diversité et plaisir gastronomique au quotidien.",
+   detail:{a:"Tavernas, mézédès, poissons frais, huile d'olive. Marché Varvakios remarquable. Moins de diversité internationale.",
+           m:"Bouillabaisse, fruits de mer, marché du Noailles, influence nord-africaine. Forte culture gastronomique populaire.",
+           s:"Cuisine nordique de qualité, restauration gastronomique reconnue (Noma influence). Mais coteux et moins de convivialité méditerranéenne."},
+   rationale:{a:"Excellente tradition, moins de diversité.",m:"Meilleure diversité et culture gastronomique populaire.",s:"Bon mais cher et moins festif."}},
+  {id:"liens",label:"Probabilité de liens",scores:{a:5,m:9,s:8},
+   context:"Capacité à créer de vraies amitiés et une communauté intellectuelle.",
+   detail:{a:"Philoxenia réelle mais barrière langue pour l'intégration profonde. Peu de communauté francophone.",
+           m:"Langue commune. Culture méditerranéenne du lien. Communautés intellectuelles actives (Friche, MuCEM).",
+           s:"Réseau établi de longue date. Mais les Suédois sont réputés réservés avec les nouveaux arrivants. Intégration profonde difficile pour les non-suédophones."},
+   rationale:{a:"Barrière langue réelle.",m:"Conditions idéales pour une vraie vie sociale.",s:"Réseau existant mais milieu social fermé."}},
+  {id:"voiture",label:"Vivre sans voiture",scores:{a:7,m:7,s:8},
+   context:"Faisabilité d'une vie quotidienne sans voiture personnelle.",
+   detail:{a:"Centre marchable. 3 lignes de métro + tram. Trottoirs parfois dégradés. Chaleur estivale complique la marche.",
+           m:"Transports GRATUITS pour 65+ depuis sept. 2025 (RTM). 200 stations VAE. Ville encore voiture-dépendante hors centre.",
+           s:"SL parmi les meilleurs réseaux nordiques. Réductions seniors. Vélo très répandu. Mais hiver complique les déplacements à pied/vélo."},
+   rationale:{a:"Faisable en centre.",m:"Gratuité après 65 ans — avantage fort.",s:"Très bon réseau mais hiver pénalise les modes doux."}},
+  {id:"culture",label:"Vie culturelle",scores:{a:7,m:9,s:8},
+   context:"Richesse culturelle accessible — cinéma, théâtre, expositions, musique.",
+   detail:{a:"Festival Athènes-Épidaure (100+ productions). Onassis Stegi, Benaki, Goulandris. Cinémas plein air l'été. Tout ou presque en grec.",
+           m:"MuCEM, Friche Belle de Mai, Festival de Marseille (10€). Actoral. Tout en français — scène intellectuelle active.",
+           s:"Moderna Museet, Operan, Dramaten, Fotografiska. Scène musicale et design forte. Tout en suédois mais anglais accessible."},
+   rationale:{a:"Riche mais barrière linguistique.",m:"Accès complet en français, densité exceptionnelle.",s:"Référence de qualité — mais vous la connaissez déjà."}},
+  {id:"climat",label:"Climat & confort physique",scores:{a:6,m:8,s:4},
+   context:"Qualité du climat sur 12 mois — chaleur supportable, douceur hivernale, confort.",
+   detail:{a:"Hivers doux, printemps/automne excellents. Étés problématiques : canicules 40-43°C récurrentes (Acropole fermée plusieurs fois en 2025).",
+           m:"Étés chauds mais rarement dangereux (max 35°C). ~300 jours de soleil/an. Mistral. Mer d'avril à novembre.",
+           s:"Étés courts mais magnifiques (juin-août). Hivers longs, sombres, froids (-5 à +2°C). 1700h de soleil/an vs 2800h à Marseille. Dépression saisonnière réelle."},
+   rationale:{a:"Intersaisons superbes, étés dangereux.",m:"Confort thermique optimal sur 12 mois.",s:"Référence — ce que vous voulez fuir en partie."}},
+  {id:"nature",label:"Accès à la nature",scores:{a:6,m:8,s:7},
+   context:"Proximité de la nature, plein air, et accès équestre pour Nina.",
+   detail:{a:"Mer en tram. Collines autour d'Athènes. Îles en ferry. Peu d'options équestres directes.",
+           m:"Calanques nationales à 15 min en bus. Camargue à 1h30 (chevaux sauvages). Luberon à 1h. Arrière-pays provençal équestre.",
+           s:"Archipel de Stockholm exceptionnel en été. Forêts accessibles. Centres équestres en banlieue. Mais limité en hiver."},
+   rationale:{a:"Belle nature mais morcelée.",m:"Calanques + Provence équestre pour Nina — avantage concret.",s:"Magnifique en été, mais saisonnier."}},
+  {id:"fiscalite",label:"Fiscalité retraite",scores:{a:9,m:5,s:3},
+   context:"Traitement fiscal des pensions suédoises et des revenus d'investissement.",
+   detail:{a:"Flat tax 7% sur tous revenus étrangers (pensions, dividendes, intérêts) pendant 15 ans. Convention fiscale Suède-Grèce applicable. Taux libératoire.",
+           m:"Fiscalité française standard progressive. Pas de régime préférentiel. Système connu et prévisible.",
+           s:"Imposition progressive suédoise : jusqu'à ~52% au-delà du seuil national (~615 000 SEK). Prélèvements sociaux inclus. Pas d'avantage spécifique pour les retraités."},
+   rationale:{a:"Avantage fiscal considérable — plusieurs milliers d'euros/an.",m:"Normale française — aucun avantage spécifique.",s:"Référence — votre fiscalité actuelle, la plus lourde des trois."}},
+  {id:"admin",label:"Facilité administrative",scores:{a:4,m:9,s:9},
+   context:"Facilité de s'installer et naviguer la vie administrative au quotidien.",
+   detail:{a:"Bureaucratie complexe, lente, principalement en grec. AMKA, AFM, compte bancaire : plusieurs semaines à mois.",
+           m:"Citoyen EU en France : zéro friction. Droits immédiats. Tout en français.",
+           s:"BankID, Skatteverket, Försäkringskassan : tout digital, tout intégré. Parmi les administrations publiques les plus efficaces au monde."},
+   rationale:{a:"Complexe — nécessite souvent un intermédiaire.",m:"Simple et prévisible.",s:"Référence d'excellence administrative."}},
+  {id:"famille",label:"Proximité de Téa",scores:{a:7,m:6,s:10},
+   context:"Facilité de voir Téa à Stockholm — fréquence, coût, spontanéité.",
+   detail:{a:"~10 vols directs/semaine (Aegean, SAS, Norwegian). 3h45. Dès 48€. Connexion robuste.",
+           m:"Pas de vol direct fiable. Correspondance via Paris/Amsterdam : 4-6h, 150-300€. Faisable mais à planifier.",
+           s:"Téa est ici. Spontanéité totale."},
+   rationale:{a:"Connexion directe régulière — visites fréquentes envisageables.",m:"Moins direct mais gérable.",s:"Référence maximale — score 10 par définition."}}
+];
 
-// ── STATE ───────────────────────────────────────────────────────────────────
-let weights={}; // {critId: {etienne:4, nina:4}}
-REF_CRITERIA.forEach(c=>weights[c.id]={...DEFAULT_WEIGHTS});
-let notes=[];
-let lastModifiedBy=null,lastModifiedAt=null,lastKnownAt=null;
+const DEF_W={etienne:4,nina:4};
+let weights={};
+CRITERIA.forEach(c=>weights[c.id]={...DEF_W});
+let notes=[],lastModifiedBy=null,lastModifiedAt=null,lastKnownAt=null;
 let currentUser='etienne';
 let editingCritId=null;
 
-// ── HELPERS ─────────────────────────────────────────────────────────────────
+// ── HELPERS ──────────────────────────────────────────────────────────────
 function sc(s){return s>=8?'#2D6A4F':s>=6?'#B8860B':'#8B2020'}
-function avgW(cid){const w=weights[cid];return Math.round((w.etienne+w.nina)/2*10)/10}
+function scSto(s){return s>=8?'#5a7a6a':s>=6?'#8a7040':'#7a4040'}
+function avgW(id){const w=weights[id];return Math.round((w.etienne+w.nina)/2*10)/10}
 function wtTotal(destId){
   let s=0,tw=0;
-  REF_CRITERIA.forEach(c=>{
-    const aw=avgW(c.id);
-    s+=c.scores[destId]*aw;
-    tw+=aw;
-  });
+  CRITERIA.forEach(c=>{const aw=avgW(c.id);s+=c.scores[destId]*aw;tw+=aw});
   return Math.round(s/tw*10)/10;
 }
-function wtTotalPerson(destId,person){
+function wtTotalP(destId,p){
   let s=0,tw=0;
-  REF_CRITERIA.forEach(c=>{
-    const w=weights[c.id][person];
-    s+=c.scores[destId]*w;
-    tw+=w;
-  });
+  CRITERIA.forEach(c=>{const w=weights[c.id][p];s+=c.scores[destId]*w;tw+=w});
   return Math.round(s/tw*10)/10;
+}
+function delta(val,ref){
+  const d=val-ref;
+  if(Math.abs(d)<0.1)return{label:'=',cls:'neu'};
+  return d>0?{label:`+${d.toFixed(1)}`,cls:'pos'}:{label:`${d.toFixed(1)}`,cls:'neg'};
 }
 
-// ── JSONBIN ─────────────────────────────────────────────────────────────────
+// ── JSONBin ───────────────────────────────────────────────────────────────
 async function loadFromBin(){
   setSyncing();
   try{
-    const res=await fetch(API_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
-    if(res.ok){
-      const data=await res.json();
-      if(data&&data.weights){
-        REF_CRITERIA.forEach(c=>{
-          if(data.weights[c.id]){
-            weights[c.id]={
-              etienne:data.weights[c.id].etienne||DEFAULT_WEIGHTS.etienne,
-              nina:data.weights[c.id].nina||DEFAULT_WEIGHTS.nina
-            };
-          }
+    const r=await fetch(API_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+    if(r.ok){
+      const d=await r.json();
+      if(d&&d.weights){
+        CRITERIA.forEach(c=>{
+          if(d.weights[c.id]) weights[c.id]={etienne:d.weights[c.id].etienne||4,nina:d.weights[c.id].nina||4};
         });
-        notes=data.notes||[];
-        lastModifiedBy=data.lastModifiedBy||null;
-        lastModifiedAt=data.lastModifiedAt||null;
+        notes=d.notes||[];
+        lastModifiedBy=d.lastModifiedBy||null;
+        lastModifiedAt=d.lastModifiedAt||null;
         lastKnownAt=lastModifiedAt;
       }
       setSynced();
     } else { await saveToBin(); }
-  }catch(e){setError('hors ligne — modifications locales');}
+  }catch(e){setError('hors ligne');}
   renderAll();
 }
 
@@ -334,34 +367,24 @@ async function saveToBin(){
   lastModifiedBy=currentUser==='etienne'?'Étienne':'Nina';
   lastModifiedAt=new Date().toISOString();
   lastKnownAt=lastModifiedAt;
-  const payload={weights,notes,lastModifiedBy,lastModifiedAt};
   try{
-    const res=await fetch(API_URL,{method:'PUT',
+    const r=await fetch(API_URL,{method:'PUT',
       headers:{'Content-Type':'application/json','X-Master-Key':API_KEY},
-      body:JSON.stringify(payload)});
-    if(res.ok){setSynced();}else{setError('erreur de sauvegarde');}
-  }catch(e){setError('hors ligne — réessayez');}
+      body:JSON.stringify({weights,notes,lastModifiedBy,lastModifiedAt})});
+    if(r.ok){setSynced();}else{setError('erreur sauvegarde');}
+  }catch(e){setError('hors ligne');}
   renderAll();
 }
 
 async function poll(){
   try{
-    const res=await fetch(API_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
-    if(res.ok){
-      const data=await res.json();
-      if(data&&data.lastModifiedAt&&data.lastModifiedAt!==lastKnownAt){
-        REF_CRITERIA.forEach(c=>{
-          if(data.weights&&data.weights[c.id]){
-            weights[c.id]={
-              etienne:data.weights[c.id].etienne||DEFAULT_WEIGHTS.etienne,
-              nina:data.weights[c.id].nina||DEFAULT_WEIGHTS.nina
-            };
-          }
-        });
-        notes=data.notes||[];
-        lastModifiedBy=data.lastModifiedBy;
-        lastModifiedAt=data.lastModifiedAt;
-        lastKnownAt=lastModifiedAt;
+    const r=await fetch(API_URL+'/latest',{headers:{'X-Master-Key':API_KEY,'X-Bin-Meta':'false'}});
+    if(r.ok){
+      const d=await r.json();
+      if(d&&d.lastModifiedAt&&d.lastModifiedAt!==lastKnownAt){
+        CRITERIA.forEach(c=>{if(d.weights&&d.weights[c.id]) weights[c.id]={etienne:d.weights[c.id].etienne||4,nina:d.weights[c.id].nina||4};});
+        notes=d.notes||[];
+        lastModifiedBy=d.lastModifiedBy;lastModifiedAt=d.lastModifiedAt;lastKnownAt=lastModifiedAt;
         setSynced();renderAll();
       }
     }
@@ -374,191 +397,208 @@ function setSynced(){
   const who=lastModifiedBy,when=lastModifiedAt?new Date(lastModifiedAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'';
   document.getElementById('sync-status').textContent=who?`synchronisé · dernière modif par ${who} à ${when}`:'synchronisé';
 }
-function setError(msg){document.getElementById('sync-dot').className='sync-dot error';document.getElementById('sync-status').textContent=msg;}
+function setError(m){document.getElementById('sync-dot').className='sync-dot error';document.getElementById('sync-status').textContent=m;}
 
-// ── RENDER ───────────────────────────────────────────────────────────────────
+// ── RENDER ────────────────────────────────────────────────────────────────
 function renderAll(){renderScorecard();renderWeights();renderDivergence();renderDetail();renderNotes();}
 
 function renderScorecard(){
   let h=`<div class="sg-h">Critère</div>`;
-  const dests=[{id:'a',label:'Athènes',emoji:'🇬🇷'},{id:'m',label:'Marseille',emoji:'🇫🇷'}];
-  dests.forEach(d=>h+=`<div class="sg-h dest">${d.emoji} ${d.label}</div>`);
-  REF_CRITERIA.forEach(c=>{
+  h+=`<div class="sg-h dest">🇬🇷 Athènes</div>`;
+  h+=`<div class="sg-h dest">🇫🇷 Marseille</div>`;
+  h+=`<div class="sg-h sto">🇸🇪 Stockholm<br><span style="font-size:.55rem;opacity:.6;letter-spacing:.04em;text-transform:none">référence actuelle</span></div>`;
+
+  CRITERIA.forEach(c=>{
     const we=weights[c.id].etienne,wn=weights[c.id].nina,wa=avgW(c.id);
     h+=`<div class="sg-crit">
       <div class="cn">${c.label}</div>
       <div class="cw-row">
         <span class="cw">poids :</span>
-        <span class="weight-pill e">É ${we}</span>
-        <span class="weight-pill n">N ${wn}</span>
-        <span class="weight-pill avg">∅ ${wa}</span>
+        <span class="wp e">É ${we}</span>
+        <span class="wp n">N ${wn}</span>
+        <span class="wp avg">∅ ${wa}</span>
       </div>
     </div>`;
-    dests.forEach(d=>{
-      const s=c.scores[d.id];
-      h+=`<div class="sg-score-cell">
-        <span class="score-badge" style="background:${sc(s)}">${s}</span>
-      </div>`;
-    });
+    // Athènes
+    const sa=c.scores.a,sm=c.scores.m,ss=c.scores.s;
+    const da=delta(sa,ss),dm=delta(sm,ss);
+    h+=`<div class="sg-cell">
+      <span class="score-badge" style="background:${sc(sa)}">${sa}</span>
+      <span class="delta ${da.cls}">${da.label} vs STO</span>
+    </div>`;
+    // Marseille
+    h+=`<div class="sg-cell">
+      <span class="score-badge" style="background:${sc(sm)}">${sm}</span>
+      <span class="delta ${dm.cls}">${dm.label} vs STO</span>
+    </div>`;
+    // Stockholm
+    h+=`<div class="sg-cell sto-cell">
+      <span class="sto-badge" style="background:${scSto(ss)}">${ss}</span>
+      <span class="delta neu" style="font-size:.58rem">référence</span>
+    </div>`;
   });
+
   // totals
+  const ta=wtTotal('a'),tm=wtTotal('m'),ts=wtTotal('s');
+  const dte=delta(ta,ts),dtm=delta(tm,ts);
+  const tea=wtTotalP('a','etienne'),tna=wtTotalP('a','nina');
+  const tem=wtTotalP('m','etienne'),tnm=wtTotalP('m','nina');
+  const tes=wtTotalP('s','etienne'),tns=wtTotalP('s','nina');
+
   h+=`<div style="display:contents">
-    <div class="total-crit">
-      <div class="tl">Total pondéré</div>
-    </div>`;
-  dests.forEach(d=>{
-    const avg=wtTotal(d.id),te=wtTotalPerson(d.id,'etienne'),tn=wtTotalPerson(d.id,'nina');
-    h+=`<div class="total-score-cell">
-      <div class="tv">${avg}</div>
-      <div class="tv-sub">
-        <span class="tv-mp">É ${te}</span>
-        <span class="tv-mp">N ${tn}</span>
-      </div>
-    </div>`;
-  });
-  h+=`</div>`;
+    <div class="total-crit"><div class="tl">Total pondéré</div></div>
+    <div class="total-cell">
+      <div class="tv">${ta}</div>
+      <div class="tv-sub"><span class="tv-mp">É ${tea}</span><span class="tv-mp">N ${tna}</span></div>
+      <div class="tv-delta ${dte.cls}">${dte.label} vs STO</div>
+    </div>
+    <div class="total-cell">
+      <div class="tv">${tm}</div>
+      <div class="tv-sub"><span class="tv-mp">É ${tem}</span><span class="tv-mp">N ${tnm}</span></div>
+      <div class="tv-delta ${dtm.cls}">${dtm.label} vs STO</div>
+    </div>
+    <div class="total-cell sto-total">
+      <div class="tv sto">${ts}</div>
+      <div class="tv-sub"><span class="tv-mp">É ${tes}</span><span class="tv-mp">N ${tns}</span></div>
+      <div style="font-size:.58rem;font-family:var(--mono);color:rgba(255,255,255,.35)">référence</div>
+    </div>
+  </div>`;
   document.getElementById('score-grid').innerHTML=h;
 }
 
 function renderWeights(){
   const isE=currentUser==='etienne';
   let h='';
-  REF_CRITERIA.forEach(c=>{
+  CRITERIA.forEach(c=>{
     const we=weights[c.id].etienne,wn=weights[c.id].nina,wa=avgW(c.id);
     h+=`<div class="wt-row">
       <div class="wt-name">${c.label}</div>
-      <div class="wt-slider-wrap ${isE?'':'disabled'}">
-        ${isE
-          ?`<input type="range" min="1" max="5" value="${we}" oninput="liveWeight('${c.id}','etienne',this.value,this.nextElementSibling)" onchange="saveToBin()">`
-          :`<input type="range" min="1" max="5" value="${we}" disabled style="opacity:.4">`}
+      <div class="wt-sw">
+        ${isE?`<input type="range" min="1" max="5" value="${we}" oninput="liveW('${c.id}','etienne',this.value,this.nextElementSibling)" onchange="saveToBin()">`
+             :`<input type="range" min="1" max="5" value="${we}" disabled style="opacity:.35">`}
         <span class="wt-val e">${we}</span>
       </div>
-      <div class="wt-slider-wrap nina ${!isE?'':'disabled'}">
-        ${!isE
-          ?`<input type="range" min="1" max="5" value="${wn}" oninput="liveWeight('${c.id}','nina',this.value,this.nextElementSibling)" onchange="saveToBin()">`
-          :`<input type="range" min="1" max="5" value="${wn}" disabled style="opacity:.4">`}
+      <div class="wt-sw nina">
+        ${!isE?`<input type="range" min="1" max="5" value="${wn}" oninput="liveW('${c.id}','nina',this.value,this.nextElementSibling)" onchange="saveToBin()">`
+              :`<input type="range" min="1" max="5" value="${wn}" disabled style="opacity:.35">`}
         <span class="wt-val n">${wn}</span>
       </div>
       <div class="wt-avg">∅ ${wa}</div>
     </div>`;
   });
-  document.getElementById('weights-rows').innerHTML=h;
+  document.getElementById('wt-rows').innerHTML=h;
 }
 
-function liveWeight(cid,person,val,el){
-  weights[cid][person]=parseInt(val);
-  if(el)el.textContent=val;
+function liveW(id,p,v,el){
+  weights[id][p]=parseInt(v);
+  if(el)el.textContent=v;
   renderScorecard();renderDivergence();
 }
 
 function renderDivergence(){
-  const dests=[{id:'a',label:'Athènes',emoji:'🇬🇷'},{id:'m',label:'Marseille',emoji:'🇫🇷'}];
-  // sort by divergence (abs diff in weights)
-  const sorted=[...REF_CRITERIA].sort((a,b)=>
+  const sorted=[...CRITERIA].sort((a,b)=>
     Math.abs(weights[b.id].etienne-weights[b.id].nina)-Math.abs(weights[a.id].etienne-weights[a.id].nina)
   );
   let h='';
   sorted.forEach(c=>{
-    const we=weights[c.id].etienne,wn=weights[c.id].nina;
-    const diff=Math.abs(we-wn);
-    const diffLabel=diff===0?'accord parfait':`écart de ${diff}`;
-    h+=`<div class="diverg-item">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <span style="font-size:.88rem;font-weight:500;color:var(--navy)">${c.label}</span>
-        <span style="font-size:.67rem;font-family:var(--mono);color:${diff===0?'var(--green)':'var(--amber)'}">${diffLabel}</span>
+    const we=weights[c.id].etienne,wn=weights[c.id].nina,diff=Math.abs(we-wn);
+    const tagCls=diff===0?'agree':diff===1?'mild':'strong';
+    const tagLbl=diff===0?'accord parfait':diff===1?'léger écart':`écart de ${diff}`;
+    h+=`<div class="div-item">
+      <div class="div-crit-head">
+        <span class="div-crit-name">${c.label}</span>
+        <span class="div-gap-tag ${tagCls}">${tagLbl}</span>
       </div>
-      <div style="display:grid;grid-template-columns:50px 1fr 40px;align-items:center;gap:8px;margin-bottom:4px">
-        <span style="font-size:.67rem;font-family:var(--mono);color:var(--navy)">Étienne</span>
-        <div style="height:12px;background:var(--cream-d);border-radius:2px;overflow:hidden">
-          <div style="height:100%;width:${we*20}%;background:var(--navy);border-radius:2px"></div>
-        </div>
+      <div class="div-bar-row">
+        <span class="div-person" style="color:var(--navy)">Étienne</span>
+        <div class="div-track"><div class="div-fill" style="width:${we*20}%;background:var(--navy)"></div></div>
         <span style="font-size:.7rem;font-family:var(--mono);font-weight:500;color:var(--navy);text-align:right">${we}/5</span>
       </div>
-      <div style="display:grid;grid-template-columns:50px 1fr 40px;align-items:center;gap:8px;margin-bottom:8px">
-        <span style="font-size:.67rem;font-family:var(--mono);color:var(--amber)">Nina</span>
-        <div style="height:12px;background:var(--cream-d);border-radius:2px;overflow:hidden">
-          <div style="height:100%;width:${wn*20}%;background:var(--gold);border-radius:2px"></div>
-        </div>
+      <div class="div-bar-row">
+        <span class="div-person" style="color:var(--amber)">Nina</span>
+        <div class="div-track"><div class="div-fill" style="width:${wn*20}%;background:var(--gold)"></div></div>
         <span style="font-size:.7rem;font-family:var(--mono);font-weight:500;color:var(--amber);text-align:right">${wn}/5</span>
       </div>
-      <div style="display:flex;gap:16px;padding-top:8px;border-top:1px solid var(--border)">
-        ${dests.map(d=>{
-          const s=c.scores[d.id];
-          return `<span style="font-size:.72rem;font-family:var(--mono);color:var(--ink-m)">${d.emoji} ${d.label} <span style="font-weight:500;color:${sc(s)}">${s}/10</span></span>`;
-        }).join('')}
-        <span style="margin-left:auto;font-size:.67rem;font-family:var(--mono);color:var(--ink-f)">poids moy. ${avgW(c.id)}</span>
+      <div class="div-score-row">
+        <span class="div-score-dest">🇬🇷 <span style="font-weight:500;color:${sc(c.scores.a)}">${c.scores.a}</span></span>
+        <span class="div-score-dest">🇫🇷 <span style="font-weight:500;color:${sc(c.scores.m)}">${c.scores.m}</span></span>
+        <span class="div-score-dest">🇸🇪 <span style="font-weight:500;color:${scSto(c.scores.s)}">${c.scores.s}</span> <span style="opacity:.6;font-size:.63rem">réf.</span></span>
+        <span style="margin-left:auto;font-size:.65rem;font-family:var(--mono);color:var(--ink-f)">poids moy. ${avgW(c.id)}</span>
       </div>
     </div>`;
   });
-  document.getElementById('diverg-list').innerHTML=h;
+  document.getElementById('div-list').innerHTML=h;
 }
 
 function renderDetail(){
-  const dests=[{id:'a',label:'Athènes',emoji:'🇬🇷'},{id:'m',label:'Marseille',emoji:'🇫🇷'}];
   let h='';
-  REF_CRITERIA.forEach(c=>{
-    h+=`<div class="detail-item">
-      <div class="detail-head" onclick="this.nextElementSibling.classList.toggle('open')">
-        <span class="dhn">${c.label}</span>
-        <span class="dhw">poids ∅ ${avgW(c.id)} ▸</span>
+  CRITERIA.forEach(c=>{
+    const sa=c.scores.a,sm=c.scores.m,ss=c.scores.s;
+    h+=`<div class="det-item">
+      <div class="det-head" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span class="det-name">${c.label}</span>
+        <span class="det-meta">poids ∅ ${avgW(c.id)} · 🇬🇷 ${sa} · 🇫🇷 ${sm} · 🇸🇪 ${ss} ▸</span>
       </div>
-      <div class="detail-body">
-        ${c.context?`<div class="d-ctx">${c.context}</div>`:''}
-        <div class="d-cols">
+      <div class="det-body">
+        ${c.context?`<div class="det-ctx">${c.context}</div>`:''}
+        <div class="det-cols">
           <div>
-            <div class="d-col-title">🇬🇷 Athènes</div>
-            <div>${c.detail&&c.detail.a?c.detail.a:''}</div>
-            ${c.rationale&&c.rationale.a?`<div class="d-rat">${c.rationale.a}</div>`:''}
+            <div class="det-col-title">🇬🇷 Athènes</div>
+            <div>${c.detail.a||''}</div>
+            ${c.rationale.a?`<div class="det-rat">${c.rationale.a}</div>`:''}
           </div>
           <div>
-            <div class="d-col-title">🇫🇷 Marseille</div>
-            <div>${c.detail&&c.detail.m?c.detail.m:''}</div>
-            ${c.rationale&&c.rationale.m?`<div class="d-rat">${c.rationale.m}</div>`:''}
+            <div class="det-col-title">🇫🇷 Marseille</div>
+            <div>${c.detail.m||''}</div>
+            ${c.rationale.m?`<div class="det-rat">${c.rationale.m}</div>`:''}
+          </div>
+          <div class="det-col sto-col">
+            <div class="det-col-title sto">🇸🇪 Stockholm — référence</div>
+            <div>${c.detail.s||''}</div>
+            ${c.rationale.s?`<div class="det-rat">${c.rationale.s}</div>`:''}
           </div>
         </div>
-        <div class="d-scores-row">
-          ${dests.map(d=>{
-            const s=c.scores[d.id];
-            return `<div class="ds-item">
-              <span class="ds-badge" style="background:${sc(s)}">${s}</span>
-              <div><div class="ds-dest">${d.emoji} ${d.label}</div>
-              <div class="ds-rat">${s>=8?'fort avantage':s>=6?'satisfaisant':'point faible'}</div></div>
-            </div>`;
-          }).join('')}
-          <div class="d-verdict">${c.scores.a>c.scores.m?'🇬🇷 avantage':c.scores.m>c.scores.a?'🇫🇷 avantage':'égalité'}</div>
+        <div class="det-scores-row">
+          ${[{id:'a',lbl:'Athènes',emoji:'🇬🇷',s:sa,isSto:false},{id:'m',lbl:'Marseille',emoji:'🇫🇷',s:sm,isSto:false},{id:'s',lbl:'Stockholm',emoji:'🇸🇪',s:ss,isSto:true}].map(d=>`
+            <div class="ds-item">
+              <span class="ds-badge ${d.isSto?'sto':''}" style="background:${d.isSto?scSto(d.s):sc(d.s)}">${d.s}</span>
+              <div>
+                <div class="ds-dest">${d.emoji} ${d.lbl}</div>
+                <div class="ds-rat">${d.isSto?'référence':d.s>=8?'fort avantage':d.s>=6?'satisfaisant':'point faible'}</div>
+              </div>
+            </div>`).join('')}
+          <div class="det-verdict">
+            ${sa>sm&&sa>ss?'🇬🇷 avantage':sm>sa&&sm>ss?'🇫🇷 avantage':ss>=sa&&ss>=sm?'🇸🇪 pas de gain':'ex aequo'}
+          </div>
         </div>
       </div>
     </div>`;
   });
-  document.getElementById('detail-grid').innerHTML=h;
+  document.getElementById('det-grid').innerHTML=h;
 }
 
 function renderNotes(){
   const list=document.getElementById('notes-list');
   if(!notes||!notes.length){list.innerHTML=`<p class="empty-note">aucune note pour l'instant</p>`;return;}
-  let h='';
-  notes.forEach((n,i)=>{
+  list.innerHTML=notes.map((n,i)=>{
     const when=new Date(n.at).toLocaleDateString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-    h+=`<div class="note-item"><div class="note-author"><strong>${n.author}</strong>${when}</div><div class="note-text">${n.text}</div><button class="note-del" onclick="delNote(${i})">✕</button></div>`;
-  });
-  list.innerHTML=h;
+    return `<div class="note-item"><div class="note-author"><strong>${n.author}</strong>${when}</div><div class="note-text">${n.text}</div><button class="note-del" onclick="delNote(${i})">✕</button></div>`;
+  }).join('');
 }
 
-// ── INTERACTIONS ─────────────────────────────────────────────────────────────
+// ── INTERACTIONS ──────────────────────────────────────────────────────────
 function showTab(id,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');btn.classList.add('active');
   if(id==='weights')renderWeights();
 }
-
 function setUser(u){
   currentUser=u;
   document.getElementById('btn-e').classList.toggle('active',u==='etienne');
   document.getElementById('btn-n').classList.toggle('active',u==='nina');
   renderWeights();
 }
-
 function addNote(){
   const inp=document.getElementById('note-input'),txt=inp.value.trim();
   if(!txt)return;
@@ -567,7 +607,7 @@ function addNote(){
 }
 function delNote(i){notes.splice(i,1);saveToBin();}
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────────────────
 loadFromBin();
 setInterval(poll,15000);
 </script>
